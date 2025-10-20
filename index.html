@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LunaTV - 全球视频与影评平台</title>
+    <!-- 引入 Tailwind CSS CDN，用于快速构建响应式和美观的界面 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* 引入 Inter 字体以确保全球可读性 */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f4f7f9;
+        }
+        /* 针对视频播放器的模拟样式 */
+        #video-player-mock {
+            background: linear-gradient(135deg, #1f2937, #111827);
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #e5e7eb;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- 导航栏 (Navigation Bar) -->
+    <header class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- 标志/标题 -->
+                <a href="#" class="flex-shrink-0 text-3xl font-extrabold text-indigo-700 tracking-wider">
+                    LunaTV
+                </a>
+                <!-- 导航链接 (隐藏在移动端，桌面端显示) -->
+                <nav class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                    <a href="#" class="text-gray-900 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">全球直播</a>
+                    <a href="#reviews-section" class="text-gray-900 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">热门影评</a>
+                    <a href="#" class="text-gray-900 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">精选内容</a>
+                </nav>
+                <!-- 登录/注册按钮 -->
+                <div class="flex items-center space-x-4">
+                    <button class="bg-indigo-600 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-indigo-700 transition duration-150 ease-in-out shadow-md">
+                        登录/注册
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主内容区 (Main Content Area) -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- 视频播放器区 (Video Player Section) - 基于 LunaTV 仓库的核心功能 -->
+        <section class="mb-10 rounded-xl overflow-hidden shadow-2xl">
+            <h1 class="text-4xl font-bold mb-4 text-gray-900">
+                正在观看：全球精选频道
+            </h1>
+            <!-- 实际项目中需要嵌入 HLS/DASH 播放器，例如 video.js 或 hls.js -->
+            <div id="video-player-mock" class="rounded-lg">
+                <!-- 视频播放器占位符 -->
+                <p>这里是视频播放器 (Video Player) - 请在此嵌入 HLS/DASH 播放逻辑</p>
+                <p class="mt-2 text-sm text-gray-400">（基于 LunaTV 仓库，实现全球直播源播放）</p>
+            </div>
+        </section>
+
+        <!-- Google AdSense 广告位 1 (Adsense Placeholder 1) -->
+        <div class="my-10 p-6 bg-yellow-100 border-2 border-yellow-400 rounded-xl text-center text-gray-800">
+            <h2 class="text-xl font-bold mb-2">Google AdSense 广告位</h2>
+            <p class="text-sm">请在此处插入您的 AdSense 广告代码（例如，页首横幅广告）。</p>
+            <div id="adsense-top-banner" class="w-full h-24 bg-yellow-200 flex items-center justify-center text-yellow-700 text-lg font-mono mt-3 rounded-lg">
+                &lt;-- AdSense Code Here --&gt;
+            </div>
+        </div>
+
+        <!-- 影评抓取与 SEO 内容区 (Movie Review Scraping and SEO Content) -->
+        <section id="reviews-section" class="mb-10 bg-white p-8 rounded-xl shadow-2xl">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6 border-b pb-3">
+                <span class="text-indigo-600">热门影评</span> - 提升全球 SEO 排名
+            </h2>
+            <p class="text-gray-600 mb-6">以下内容由后台影评抓取服务（Mock API）提供。定期更新影评内容是提高搜索引擎可见性的关键。</p>
+
+            <!-- 影评加载指示器 -->
+            <div id="reviews-loading" class="text-center py-10">
+                <svg class="animate-spin h-8 w-8 text-indigo-600 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <p class="mt-2 text-indigo-600">正在加载最新影评...</p>
+            </div>
+
+            <!-- 影评列表区 -->
+            <div id="reviews-list" class="space-y-6 hidden">
+                <!-- 影评将通过 JavaScript 渲染到这里 -->
+            </div>
+        </section>
+
+        <!-- 频道/内容推荐区 (Channel/Content Recommendation) -->
+        <section class="mb-10">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">
+                更多精选频道 (源自 LunaTV)
+            </h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- 推荐卡片 1 -->
+                <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300 overflow-hidden cursor-pointer">
+                    <div class="h-32 bg-red-500 flex items-center justify-center text-white text-lg font-bold">
+                        [Image of A movie poster]
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-lg text-gray-900 truncate">全球新闻频道</h3>
+                        <p class="text-sm text-gray-500">实时更新，洞察世界</p>
+                    </div>
+                </div>
+                <!-- 推荐卡片 2 -->
+                <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300 overflow-hidden cursor-pointer">
+                    <div class="h-32 bg-blue-500 flex items-center justify-center text-white text-lg font-bold">
+                        [Image of A documentary poster]
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-lg text-gray-900 truncate">科幻电影集</h3>
+                        <p class="text-sm text-gray-500">经典与新作</p>
+                    </div>
+                </div>
+                <!-- 推荐卡片 3 -->
+                <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300 overflow-hidden cursor-pointer">
+                    <div class="h-32 bg-green-500 flex items-center justify-center text-white text-lg font-bold">
+                        [Image of A nature documentary poster]
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-lg text-gray-900 truncate">自然探索频道</h3>
+                        <p class="text-sm text-gray-500">4K 超清画质</p>
+                    </div>
+                </div>
+                <!-- 推荐卡片 4 -->
+                <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300 overflow-hidden cursor-pointer">
+                    <div class="h-32 bg-purple-500 flex items-center justify-center text-white text-lg font-bold">
+                        [Image of A drama poster]
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-lg text-gray-900 truncate">亚洲剧集专区</h3>
+                        <p class="text-sm text-gray-500">独家首播内容</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Google AdSense 广告位 2 (Adsense Placeholder 2) -->
+        <div class="my-10 p-6 bg-yellow-100 border-2 border-yellow-400 rounded-xl text-center text-gray-800">
+            <h2 class="text-xl font-bold mb-2">Google AdSense 广告位</h2>
+            <p class="text-sm">请在此处插入您的 AdSense 广告代码（例如，文章内嵌广告）。</p>
+            <div id="adsense-inline-content" class="w-full h-24 bg-yellow-200 flex items-center justify-center text-yellow-700 text-lg font-mono mt-3 rounded-lg">
+                &lt;-- AdSense Code Here --&gt;
+            </div>
+        </div>
+
+    </main>
+
+    <!-- 页脚 (Footer) -->
+    <footer class="bg-gray-800 text-white mt-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center">
+            <p>&copy; 2025 LunaTV | 基于 MoonTechLab 开源项目理念构建</p>
+            <div class="mt-4 space-x-4 text-sm">
+                <a href="#" class="hover:text-indigo-400">联系我们</a>
+                <span class="text-gray-600">|</span>
+                <a href="#" class="hover:text-indigo-400">隐私政策</a>
+                <span class="text-gray-600">|</span>
+                <a href="#" class="hover:text-indigo-400">使用条款</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript 逻辑：模拟影评抓取功能 (Mock Review Scraping Feature) -->
+    <script>
+        // 定义影评数据结构
+        const mockReviews = [
+            {
+                id: 1,
+                title: "《流浪地球 2》：中国科幻的史诗级突破",
+                source: "影评网",
+                score: 4.8,
+                snippet: "这部电影不仅在视觉特效上达到了世界级水准，其对人类命运共同体的探讨也展现了深刻的人文思考。强推！"
+            },
+            {
+                id: 2,
+                title: "《奥本海默》：诺兰再次挑战叙事极限",
+                source: "电影天堂",
+                score: 4.5,
+                snippet: "一场关于道德、科学与毁灭的心理惊悚剧。Cillian Murphy 的表演令人难以忘怀，是近年来最佳传记片之一。"
+            },
+            {
+                id: 3,
+                title: "《鱿鱼游戏》第二季：期待与压力并存",
+                source: "剧集观察",
+                score: 4.2,
+                snippet: "新一季的设定更加黑暗和复杂，但能否超越第一季的全球影响力，还有待观察。开局节奏稍慢。"
+            }
+        ];
+
+        /**
+         * 模拟影评抓取 API 调用
+         * 在实际项目中，此函数会调用您的后端服务，该服务负责从外部网站抓取最新影评。
+         */
+        async function fetchReviews() {
+            // 模拟网络延迟
+            await new Promise(resolve => setTimeout(resolve, 1500));
+            // 返回 mock 数据
+            return mockReviews;
+        }
+
+        /**
+         * 渲染影评列表到 DOM 中
+         * @param {Array} reviews - 影评数据数组
+         */
+        function renderReviews(reviews) {
+            const reviewsList = document.getElementById('reviews-list');
+            const loadingIndicator = document.getElementById('reviews-loading');
+
+            // 隐藏加载动画，显示列表
+            loadingIndicator.classList.add('hidden');
+            reviewsList.classList.remove('hidden');
+            reviewsList.innerHTML = ''; // 清空现有内容
+
+            reviews.forEach(review => {
+                const reviewHtml = `
+                    <div class="p-6 bg-gray-50 border-l-4 border-indigo-500 rounded-lg shadow-md transition duration-300 hover:shadow-xl">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="text-xl font-bold text-gray-900">${review.title}</h3>
+                            <span class="text-sm font-semibold text-yellow-600 bg-yellow-100 px-3 py-1 rounded-full">${review.score} / 5.0</span>
+                        </div>
+                        <p class="text-gray-700 italic mb-3">
+                            “${review.snippet}”
+                        </p>
+                        <p class="text-sm text-gray-500 text-right">- 来源: ${review.source}</p>
+                    </div>
+                `;
+                reviewsList.innerHTML += reviewHtml;
+            });
+        }
+
+        /**
+         * 网站初始化
+         */
+        window.onload = async () => {
+            try {
+                // 1. 抓取并渲染影评（为 SEO 创造内容）
+                const reviews = await fetchReviews();
+                renderReviews(reviews);
+
+                // 2. 模拟 Google Adsense 加载（在实际环境中，AdSense 脚本会自动填充占位符）
+                console.log("AdSense 占位符已准备就绪。请在 HTML 相应位置插入 Google 提供的广告脚本。");
+
+                // 3. 视频播放器初始化
+                console.log("请在此处初始化视频播放器（例如：hls.js 或 video.js）以加载 LunaTV 提供的直播流。");
+
+            } catch (error) {
+                console.error("加载数据失败:", error);
+                document.getElementById('reviews-loading').innerHTML = '<p class="text-red-500">加载影评失败，请检查网络。</p>';
+                document.getElementById('reviews-list').classList.remove('hidden');
+            }
+        };
+    </script>
+
+</body>
+</html>
